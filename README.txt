@@ -1,7 +1,6 @@
 John Allen 
-Tanmoy Barua
 
-We use a slightly modified version of Professor Cheung's solution to HW1. 
+Used a slightly modified version of Professor Cheung's solution to HW1. 
 
 in our uprog.c: ttyread ttywrite
 

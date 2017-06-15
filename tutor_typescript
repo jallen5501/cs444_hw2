@@ -1,0 +1,52 @@
+Script started on Tue 21 Mar 2017 01:22:55 PM EDT
+tuser@tutor-vserver:~/hw2$ mtip -f uprog.lnx
+For command help, type ~?
+For help on args, rerun without args
+Code starts at 0x100100
+Using board # 1 
+~downloading uprog.lnx
+.........Done.
+
+Download done, setting EIP to 100100.
+Tutor> go 100100
+Running with device TTY1
+
+Trying simple write(4 chars)...
+hi!
+write of 4 returned 4
+Trying longer write (9 chars)
+abcdefghiwrite of 9 returned 9
+
+Trying write of 80-char string...
+AABBCCDDEEFFGGHHIIJJKKLLMMNNOOPPQQRRSSTTUUVVWWXXYYZZ[[\\]]^^__``aabbccddeeffgghh
+write returned 80
+qwertyuiop
+Got 10 chars into buf. Trying write of buf...
+qwertyuiop
+Trying another 10 chars read right away...
+qwertyuiop
+Got 10 chars on second read
+qwertyuiop
+
+Now turning echo off--
+
+Type 20 chars input, note lack of echoes...
+
+Trying write of buf...
+qwertyuioplkjhgfdsaq
+Asked for 20 characters; got 20
+Exception 3 at EIP=0010010b: Breakpoint
+Tutor> w Suspend handler: Suspending mtip, board #1--please return to it (fg command) as soon as possible
+
+[1]+  Stopped                 mtip -f uprog.lnx
+tuser@tutor-vserver:~/hw2$ e[Kfg
+mtip -f uprog.lnx
+Continuing mtip on board 1
+^C
+^C
+Quit handler: 
+killing process 1927 Leaving board #1
+tuser@tutor-vserver:~/hw2$ exit
+exit
+
+Script done on Tue 21 Mar 2017 01:23:58 PM EDT

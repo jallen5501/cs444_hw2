@@ -1,0 +1,241 @@
+Script started on Tue Mar 21 13:20:12 2017
+warning: could not update utmp entry
+sh: using dumb terminal settings.
+blade57(1)% pwd
+/courses/cs444/s17/cheungr/jmallen/hw2
+blade57(2)% make clean
+rm -f *.o *.opc *.lnx core 
+blade57(3)% make
+/groups/ulab/bin/i386-gcc -c -o startup0.opc startup0.s
+/groups/ulab/bin/i386-gcc -g -Wall -Wstrict-prototypes -Wmissing-prototypes -Wno-uninitialized -Wshadow -pedantic -D__USE_FIXED_PROTOTYPES__ -I/groups/ulab/pcdev/include -I/groups/ulab/pcdev/include -c -o startup1.opc startup1.c
+/groups/ulab/bin/i386-gcc -g -Wall -Wstrict-prototypes -Wmissing-prototypes -Wno-uninitialized -Wshadow -pedantic -D__USE_FIXED_PROTOTYPES__ -I/groups/ulab/pcdev/include -I/groups/ulab/pcdev/include -c -o tunix.opc  tunix.c
+tunix.c: In function `debug_set_trap_gate':
+tunix.c:61: warning: unsigned int format, pointer arg (arg 2)
+/groups/ulab/bin/i386-gcc -c -o sysentry.opc sysentry.s
+/groups/ulab/bin/i386-gcc -g -Wall -Wstrict-prototypes -Wmissing-prototypes -Wno-uninitialized -Wshadow -pedantic -D__USE_FIXED_PROTOTYPES__ -I/groups/ulab/pcdev/include -I/groups/ulab/pcdev/include -c -o io.opc io.c
+io.c:44: warning: no previous prototype for `control'
+/groups/ulab/bin/i386-gcc -g -Wall -Wstrict-prototypes -Wmissing-prototypes -Wno-uninitialized -Wshadow -pedantic -D__USE_FIXED_PROTOTYPES__ -I/groups/ulab/pcdev/include -I/groups/ulab/pcdev/include -c -o tty.opc tty.c
+/groups/ulab/bin/i386-gcc -g -Wall -Wstrict-prototypes -Wmissing-prototypes -Wno-uninitialized -Wshadow -pedantic -D__USE_FIXED_PROTOTYPES__ -I/groups/ulab/pcdev/include -I/groups/ulab/pcdev/include -c -o ioconf.opc ioconf.c
+/groups/ulab/bin/i386-gcc -c -o crt0.opc crt0.s
+/groups/ulab/bin/i386-gcc -g -Wall -Wstrict-prototypes -Wmissing-prototypes -Wno-uninitialized -Wshadow -pedantic -D__USE_FIXED_PROTOTYPES__ -I/groups/ulab/pcdev/include -I/groups/ulab/pcdev/include -c -o uprog.opc uprog.c
+/groups/ulab/bin/i386-gcc -c -o ulib.opc ulib.s
+/groups/ulab/bin/i386-ld -N -Ttext 1000e0 -o uprog.lnx \
+  startup0.opc startup1.opc tunix.opc sysentry.opc io.opc tty.opc ioconf.opc queue/queue.opc crt0.opc uprog.opc ulib.opc /groups/ulab/pcdev/lib/libc.a
+rm -f syms;/groups/ulab/bin/i386-nm -n uprog.lnx>uprog.syms;ln -s uprog.syms syms
+blade57(4)% ls -la
+total 160
+drwxr-xr-x   3 jmallen      1024 Mar 21 13:20 .
+drwx------   6 jmallen       512 Mar 17 01:36 ..
+-rw-r--r--   1 jmallen      1590 Mar 21 01:58 README.txt
+-rw-r--r--   1 jmallen       120 Mar 21 13:20 crt0.opc
+-rw-r--r--   1 jmallen       254 Mar 17 16:45 crt0.s
+-rw-r--r--   1 jmallen     36352 Mar 16 16:55 hw2.doc
+-rw-r--r--   1 jmallen      1505 Mar 19 19:40 io.c
+-rw-r--r--   1 jmallen      2332 Mar 21 13:20 io.opc
+-rw-r--r--   1 jmallen       631 Mar 19 18:31 io_public.h
+-rw-r--r--   1 jmallen       411 Mar 16 16:55 ioconf.c
+-rw-r--r--   1 jmallen       815 Mar 16 16:55 ioconf.h
+-rw-r--r--   1 jmallen      1748 Mar 21 13:20 ioconf.opc
+-rw-r--r--   1 jmallen      3390 Mar 19 21:02 makefile
+drwxr-xr-x   2 jmallen       512 Mar 16 16:56 queue
+-rw-r--r--   1 jmallen        98 Mar 21 13:20 startup0.opc
+-rw-r--r--   1 jmallen       206 Mar 21 01:22 startup0.s
+-rw-r--r--   1 jmallen       345 Mar 19 21:34 startup1.c
+-rw-r--r--   1 jmallen      1271 Mar 21 13:20 startup1.opc
+lrwxrwxrwx   1 jmallen        10 Mar 21 13:20 syms -> uprog.syms
+-rw-r--r--   1 jmallen       103 Mar 21 13:20 sysentry.opc
+-rw-r--r--   1 jmallen       562 Mar 16 18:04 sysentry.s
+-rw-r--r--   1 jmallen        58 Mar 19 21:26 tsyscall.h
+-rw-r--r--   1 jmallen      7671 Mar 21 01:32 tty.c
+-rw-r--r--   1 jmallen       744 Mar 16 16:55 tty.h
+-rw-r--r--   1 jmallen      8647 Mar 21 13:20 tty.opc
+-rw-r--r--   1 jmallen       415 Mar 16 16:55 tty_public.h
+-rw-r--r--   1 jmallen       281 Mar 19 19:37 tunistd.h
+-rw-r--r--   1 jmallen      2385 Mar 21 01:22 tunix.c
+-rw-r--r--   1 jmallen      5425 Mar 21 13:20 tunix.opc
+-rw-r--r--   1 jmallen      8581 Mar 16 16:55 tutor-vserver-2016-10-26-18-51-16.png
+-rw-r--r--   1 jmallen         0 Mar 21 13:20 typescript
+-rw-r--r--   1 jmallen       151 Mar 21 13:20 ulib.opc
+-rw-r--r--   1 jmallen      1378 Mar 19 22:01 ulib.s
+-rw-r--r--   1 jmallen      3156 Mar 21 01:28 uprog.c
+-rwxr-xr-x   1 jmallen     39438 Mar 21 13:20 uprog.lnx
+-rw-r--r--   1 jmallen      6000 Mar 21 13:20 uprog.opc
+-rw-r--r--   1 jmallen      3563 Mar 21 13:20 uprog.syms
+blade57(5)% cat  crt0.s
+#crt01.s: startup main1
+        
+.globl _ustart, _main
+.text
+                        
+_ustart:        
+        call _main                   #call main in the uprog.c
+        pushl %eax                   #push the retval=exit_code on stack
+        call _exit                   #call sysycall exit
+blade57(6)% cat startup0.s
+# asm startup file
+# very first module in load
+.globl _finish
+  movl $0x3ffff0, %esp  # set initial kernel stack
+  call _startupc         # call C startup
+_finish:  int $3                #  return to Tutor
+blade57(7)% cat startup1.c
+/* C startup file, called from startup0.s-- */
+void clr_bss(void);
+void init_devio(void);
+void k_init(void);
+void startupc(void);
+
+extern void ustart(void);
+
+void startupc(void) {
+  clr_bss();                    /* clear BSS area (uninitialized data) */
+  init_devio();                 /* latch onto Tutor-supplied info, code */
+  k_init();                     /* start kernel */
+  ustart();
+}
+blade57(8)% cat ty syscall.h 
+#define SYS_exit        1
+#define SYS_read        3
+#define SYS_write       4
+blade57(9)% cat sysentry.s
+# description :  trap handler                   
+ 
+.globl _syscallc, _syscall      
+
+_syscall:       pushl %edx        # push the value of eax to edx to stack
+                pushl %ecx
+                pushl %ebx
+                pushl %eax
+                call _syscallc    # call c trap routine in tunix.c
+                addl $4, %esp     # use the new value of eax ,so adjust the
+                popl %ebx         # stack instead of pop eax and then
+                popl %ecx         # pop the value of ebx to edx back to stack
+                popl %edx
+                iret
+blade57(10)% cat ulib.s
+# file :        ulib.s
+# description:  assembler routines for read, write, exit
+# hw2:   add read, exit                         
+
+.globl _write,_read,_exit       
+.text
+# following Linux system call linkage
+# user stack when execution reaches _write:     
+# esp-> return addr
+#       first arg  (to be put in ebx for syscall)
+#       second arg (to be put in ecx)
+#       third arg  (to be put in edx)
+
+# user stack after pushl %ebx, needed to preserve %ebx (not a C scratch reg)
+# esp->  saved-ebx
+# 4(esp) return addr
+# 8(esp) first arg  (to be put in ebx for syscall)
+#12(esp) second arg (to be put in ecx)
+#16(esp) third arg  (to be put in edx)
+                        
+_write: pushl %ebx                    # save the value of ebx
+        movl 8(%esp),%ebx              
+        movl 12(%esp),%ecx
+        movl 16(%esp),%edx
+        movl $4,%eax
+        int $0x80                     # call trap handler
+        popl  %ebx                    # restore the value of ebx
+        ret
+
+_read:  pushl %ebx                       # save the value of ebx
+        movl 8(%esp),%ebx
+        movl 12(%esp),%ecx
+        movl 16(%esp),%edx
+        movl $3,%eax
+        int $0x80                     # call trap handler      
+        popl  %ebx                    # restore the value of ebx
+        ret
+
+_exit:  pushl %ebx                      # save the value of ebx
+        movl 8(%esp),%ebx
+        movl $1,%eax          
+        int $0x80                      # call trap handler
+        popl  %ebx                     # restore the value of ebx
+        ret
+blade57(11)% cat tunix.c
+#include <stdio.h>
+#include <cpu.h>
+#include <gates.h>
+#include <pic.h>
+#include <serial.h>
+#include "tsyscall.h"
+#include "io_public.h"
+#include "tunistd.h"
+
+
+extern IntHandler syscall; /* the assembler envelope routine    */
+extern void locate_idt(unsigned int *limitp, char ** idtp);
+extern void finish(void);
+void k_init(void);
+void set_trap_gate(int n, IntHandler *inthand_addr); 
+void debug_set_trap_gate(int n, IntHandler *inthand_addr, int debug);
+int sysexit(void);
+void syscallc(int user_eax, int devcode, char *buff , int bufflen);
+
+void k_init(){
+  ioinit();            /* ABSTRACTION of ioinit()*/
+  set_trap_gate(0x80, &syscall);   /* SET THE TRAP GATE*/
+}
+
+void syscallc( int user_eax, int devcode, char *buff , int bufflen) {
+
+  int trap_reference = user_eax;
+
+  switch (trap_reference) {
+    case SYS_exit :
+      sysexit();
+      break;
+    case SYS_write :
+      syswrite(devcode, buff, bufflen);
+      break;
+    case SYS_read :
+      sysread(devcode, buff, bufflen);
+      break;
+    default : kprintf("eax value %d is not a reference to a valid trap.\n");
+  }
+}
+
+void set_trap_gate(int n, IntHandler *inthand_addr) {
+  debug_set_intr_gate(n, inthand_addr, 0);
+}
+
+void debug_set_trap_gate(int n, IntHandler *inthand_addr, int debug) {
+  char *idt_LAaddr;             /* linear address of IDT */
+  char *idt_VAaddr;             /* virtual address of IDT */
+  Gate_descriptor *idt, *desc;
+  unsigned int limit = 0;
+
+  if (debug)
+    printf("Calling locate_idt to do sidt instruction...\n");
+  locate_idt(&limit,&idt_LAaddr);
+  /* convert to virtual address, i.e., ordinary address */
+  idt_VAaddr = idt_LAaddr - KERNEL_BASE_LA;  /* usable address of IDT */
+  /* convert to a typed pointer, for an array of Gate_descriptor */
+  idt = (Gate_descriptor *)idt_VAaddr;
+  if (debug)
+    printf("Found idt at %x, lim %x\n",idt, limit);
+  desc = &idt[n];               /* select nth descriptor in idt table */
+  /* fill in descriptor */
+  if (debug)
+    printf("Filling in desc at %x with addr %x\n",(unsigned int)desc,
+           (unsigned int)inthand_addr);
+  desc->selector = KERNEL_CS;   /* CS seg selector for int. handler */
+  desc->addr_hi = ((unsigned int)inthand_addr)>>16; /* CS seg offset of inthand  */
+  desc->addr_lo = ((unsigned int)inthand_addr)&0xffff;
+  desc->flags = GATE_P|GATE_DPL_KERNEL|GATE_TRAPGATE; /* valid, interrupt */
+  desc->zero = 0;
+}
+
+int sysexit() {
+  finish();
+  return SYS_exit;
+} 
+blade57(12)% rex   exit
+exit
+
+script done on Tue Mar 21 13:22:21 2017

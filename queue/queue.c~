@@ -1,0 +1,107 @@
+/*
+ * program : queue.c
+ * by      : Jerry Hsieh (algorithm from Data structure and algorithms - AHU)
+ * date    : Sep. 18, 1991
+ * purpose : queue package ADT
+ * history :
+ */
+
+#include "queue.h"                        
+
+static int addone(Queue *queue, int i);        /* auxiliary function */     
+
+/* ------------------------------------------------------------------------ */
+/* algorithm from "Data structure and algorithm" - AHU  p62 */
+/* that algorithm actually use maxlength - 1 elements, so we have to add 1 */
+/* to the max_chars in order to let the caller use exactly max_chars element*/
+/* Also, we are not using the 0-indexed spot in the array either, */
+/* so, for example for max_chars = 6, we are using spots 1 through 7 */
+/* Thus we need 8 array entries for 6 capacity, or capacity + 2 in general */
+
+/* note: caller is responsible for having allocated space for queue */
+int init_queue(Queue *queue, int max_chars)
+{
+  int maxlength = max_chars + 1 ;         /* waste a byte every time */
+
+  if (maxlength + 1 > MAXCHARBUF) {           /* enough memory ? */
+#ifdef SAPC
+    kprintf("Error : not enough char buffer for this queue !\n");
+#else
+    printf("Error : not enough char buffer for this queue !\n");
+#endif
+    return FALSE;
+  }
+  else {
+    queue->front = 1;
+    queue->rear = maxlength;                 
+    queue->count = 0;
+    queue->max = maxlength;                  /* actually use maxlength memory */
+    return TRUE;
+  }
+}
+
+/* ------------------------------------------------------------------------ */
+/* algorithm from "Data structure and algorithm" - AHU  p62 */
+int emptyque(Queue *queue)
+{
+  if (addone(queue,queue->rear) == queue->front)
+    return TRUE;
+  else
+    return FALSE;
+}
+
+
+ /* ------------------------------------------------------------------------ */
+/* algorithm from "Data structure and algorithm" - AHU  p62 */
+int enqueue(Queue *queue, char ch)
+{
+  if (addone(queue,addone(queue,queue->rear)) == queue->front)
+    return FULLQUE;
+  else {
+    queue->rear = addone(queue,queue->rear);
+    queue->ch[queue->rear] = ch;
+    queue->count++;
+    return ch;           /* successful */
+  }
+}
+
+/* ------------------------------------------------------------------------ */
+/* algorithm from "Data structure and algorithm" - AHU  p62 */
+int dequeue(Queue *queue)
+{
+  char ch;
+
+  if (emptyque(queue)) {
+    return EMPTYQUE;
+  }
+  else {
+    ch = queue->ch[queue->front];
+    queue->front = addone(queue,queue->front);
+    (queue->count) --;
+    return ch;
+  }
+}
+
+/* ------------------------------------------------------------------------ */
+int queuecount(Queue *queue)
+{
+  return queue->count;
+}
+
+
+/* ------------------------------------------------------------------------ */
+/* algorithm from "Data structure and algorithm" - AHU  p62 */
+/* function that return next index */
+static int addone(Queue *queue, int ind)
+{
+  return ((ind % queue->max) + 1);
+}
+
+
+
+
+
+
+
+
+
